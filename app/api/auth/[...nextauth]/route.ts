@@ -1,33 +1,68 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
-import { compare } from "bcrypt";
+import { verifyOTP } from "@/lib/twilio";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
+      name: "OTP",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        mobile: { label: "Mobile", type: "tel" },
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(credentials) {
-        const { email, password } = credentials ?? {}
-        if (!email || !password) {
-          throw new Error("Missing username or password");
+        const { mobile, otp } = credentials ?? {};
+
+        if (!mobile || !otp) {
+          throw new Error("Mobile number and OTP are required");
         }
-        const user = await prisma.user.findUnique({
-          where: {
-            email,
-          },
+
+        // Verify OTP with Twilio
+        const verification = await verifyOTP(mobile, otp);
+
+        if (!verification.success) {
+          throw new Error("Invalid OTP");
+        }
+
+        // Find or create user
+        let user = await prisma.user.findUnique({
+          where: { mobile },
         });
-        // if user doesn't exist or password doesn't match
-        if (!user || !(await compare(password, user.password))) {
-          throw new Error("Invalid username or password");
+
+        if (!user) {
+          // Auto-register new user
+          user = await prisma.user.create({
+            data: { mobile },
+          });
         }
-        return user as any;
+
+        return {
+          id: String(user.id),
+          mobile: user.mobile,
+        };
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.mobile = (user as any).mobile;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        (session.user as any).id = token.id;
+        (session.user as any).mobile = token.mobile;
+      }
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/login",
+  },
 };
 
 const handler = NextAuth(authOptions);
