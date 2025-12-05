@@ -1,6 +1,6 @@
 // These styles apply to every route in the application
 import "@/styles/globals.css";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://nextjs-postgres-auth.vercel.app"),
   creator: "shadcn",
+};
+
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },

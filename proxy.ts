@@ -1,7 +1,7 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   // Get the pathname of the request (e.g. /, /protected)
   const path = req.nextUrl.pathname;
 
@@ -22,3 +22,4 @@ export default async function middleware(req: NextRequest) {
   }
   return NextResponse.next();
 }
+
