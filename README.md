@@ -1,88 +1,128 @@
 <p align="center">
   <a>
     <img src="./public/logo.png" height="96">
-    <h3 align="center">Next.js Prisma PostgreSQL Auth Starter with Shadcn</h3>
+    <h3 align="center">مرصــاد - Mirsad</h3>
   </a>
 </p>
 
 <p align="center">
-This is a <a href="https://nextjs.org/">Next.js</a> starter kit that uses <a href="https://next-auth.js.org/">Next-Auth</a> for simple email + password login<br/>
-<a href="https://www.prisma.io/">Prisma</a> as the ORM, and Postgres database to persist the data. This application uses <a href="https://ui.shadcn.com/">Shadcn</a> for UI components, and <a href="https://tailwindcss.com/">Tailwind CSS</a> for styling. It has integrated theming support, with support for multiple themes with a custom plugin.
+المنصة الوطنية المختصة بجمع، فرز، تحليل، وتوحيد جميع اللوائح والأنظمة والقرارات الصادرة من مختلف الجهات التشريعية في المملكة العربية السعودية.
+</p>
+
+<p align="center">
+A unified national platform for collecting, organizing, analyzing, and consolidating all regulations, systems, and decisions issued by various legislative authorities in the Kingdom of Saudi Arabia.
+</p>
 
 <br/>
 
-## Configure the Database
+## About
 
-### Option 1: Quick Setup with Docker Compose (Recommended)
+**Mirsad (مرصاد)** enables establishments of all sizes and sectors to:
 
-1. Start the PostgreSQL database:
+- Access regulatory information seamlessly
+- Perform digital self-inspection to assess compliance
+- Identify potential violations before they occur
+- Receive actionable recommendations for improvement
+- Support Saudi Vision 2030 governance goals
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) 16
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) (email + password)
+- **Database**: PostgreSQL with [Prisma](https://www.prisma.io/) ORM
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **SMS/Communications**: [Twilio](https://www.twilio.com/)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+- Docker (optional, for local PostgreSQL)
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd mirsad
+```
+
+### 2. Install Dependencies
+
+```bash
+pnpm install
+# or
+npm install
+```
+
+### 3. Configure the Database
+
+#### Option A: Quick Setup with Docker Compose (Recommended)
+
+Start the PostgreSQL database:
 
 ```bash
 docker compose up -d
 ```
 
-2. Create a `.env` file in the root of the project:
+#### Option B: Use Your Own PostgreSQL Database
 
-```
-# Docker Compose PostgreSQL
+Ensure you have a PostgreSQL instance running and note the connection string.
+
+### 4. Environment Variables
+
+Create a `.env` file in the root of the project:
+
+```env
+# PostgreSQL Connection
 POSTGRES_PRISMA_URL="postgresql://postgres:postgres@localhost:5432/mirsad"
 POSTGRES_URL_NON_POOLING="postgresql://postgres:postgres@localhost:5432/mirsad"
 
-# Generate one with this command: openssl rand -base64 32
-NEXTAUTH_SECRET=
+# NextAuth Secret - Generate with: openssl rand -base64 32
+NEXTAUTH_SECRET=your-secret-here
+
+# Twilio Configuration (contact project maintainer for access)
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE_NUMBER=
 ```
 
-3. Run Prisma migrations:
+> **Note:** For Twilio environment variables, please contact the project maintainer.
+
+### 5. Run Database Migrations
 
 ```bash
 npx prisma migrate dev
 ```
 
-### Option 2: Use Your Own PostgreSQL Database
-
-Create a `.env` file in the root of the project:
-
-```
-# Your PostgreSQL connection string
-POSTGRES_PRISMA_URL=
-POSTGRES_URL_NON_POOLING=
-
-# Generate one with this command: openssl rand -base64 32
-NEXTAUTH_SECRET=
-```
-
----
-
-First, run the development server:
+### 6. Start the Development Server
 
 ```bash
+pnpm dev
+# or
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Theming with Shadcn
-
-This starter kit uses Shadcn for UI components, and Tailwind CSS for styling. It has integrated theming support, with support for multiple themes with a custom plugin.
-
-### Creating a Theme
-
-To create a theme, add to `lib/shadcn-plugin.ts`:
-
-```ts
-
- - add colors to `:root` object
-  `
-     "--brown-dark-1": "355 45% 31%",
-        "--magenta-dark-1": "200 55% 37%",
-        "--purple-dark-1": "261 51% 51%",
-        "--dark-green-1": "145 58% 55%",
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 
- - configure the `theme` object
+---
 
-    "dark-1": "hsl(var(--brown-dark-1))",
-    "dark-2": "hsl(var(--magenta-dark-1))",
-    "dark-3": "hsl(var(--purple-dark-1))",
-    "dark-4": "hsl(var(--dark-green-1))",
-```
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run ESLint |
+
+---
+
+## License
+
+This project is private and proprietary.

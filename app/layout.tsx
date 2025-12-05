@@ -3,8 +3,6 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Almarai, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import { Suspense } from "react";
-import Header from "@/components/header/header";
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -20,9 +18,9 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-const title = "مرصاد";
+const title = "مرصاد - للوائح والقوانين";
 const description =
-  "منصة مرصاد لإدارة الأعمال والمشاريع";
+  "المنصة الوطنية المختصة بجمع، فرز، تحليل، وتوحيد جميع اللوائح والأنظمة والقرارات الصادرة من مختلف الجهات التشريعية في المملكة.";
 
 export const metadata: Metadata = {
   title,
@@ -32,14 +30,14 @@ export const metadata: Metadata = {
     title,
     description,
   },
-  metadataBase: new URL("https://nextjs-postgres-auth.vercel.app"),
-  creator: "shadcn",
+  metadataBase: new URL("https://mirsaad.sa"),
+  creator: "Mirsaad",
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
 };
 
@@ -50,13 +48,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" className={`${almarai.variable} ${ibmPlexSansArabic.variable}`}>
-      <body>
+      <body className="min-h-screen bg-background antialiased">
         <Toaster />
-        <Suspense fallback="جاري التحميل...">
-          <Header />
-        </Suspense>
         {children}
-
       </body>
     </html>
   );

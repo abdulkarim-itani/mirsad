@@ -3,11 +3,25 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  
   html {
     font-family: var(--font-almarai), "Almarai", sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-ibm-plex-sans-arabic), "IBM Plex Sans Arabic", sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
   }
 }

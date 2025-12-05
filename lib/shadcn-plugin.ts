@@ -5,52 +5,55 @@ export const shadcnPlugin = plugin(
   function ({ addBase }) {
     addBase({
       ":root": {
-        "--background": "0 0% 100%",
-        "--foreground": "222.2 84% 4.9%",
+        // Royal Deep Blue & Digital Emerald Palette
+        "--background": "240 20% 99%", // Very light cool grey
+        "--foreground": "240 20% 15%", // Dark Blue-Grey text
         "--card": "0 0% 100%",
-        "--card-foreground": "222.2 84% 4.9%",
+        "--card-foreground": "240 20% 15%",
         "--popover": "0 0% 100%",
-        "--popover-foreground": "222.2 84% 4.9%",
-        "--primary": "222.2 47.4% 11.2%",
-        "--primary-foreground": "210 40% 98%",
-        "--secondary": "210 40% 96.1%",
-        "--secondary-foreground": "222.2 47.4% 11.2%",
-        "--muted": "210 40% 96.1%",
-        "--muted-foreground": "215.4 16.3% 46.9%",
-        "--accent": "210 40% 96.1%",
-        "--accent-foreground": "222.2 47.4% 11.2%",
-        "--destructive": "0 84.2% 60.2%",
-        "--destructive-foreground": "210 40% 98%",
-        "--border": "214.3 31.8% 91.4%",
-        "--input": "214.3 31.8% 91.4%",
-        "--ring": "222.2 84% 4.9%",
-        "--radius": "0.5rem",
-        // custom color for theme
-        "--brown-dark-1": "355 45% 31%",
-        "--magenta-dark-1": "200 55% 37%",
-        "--purple-dark-1": "261 51% 51%",
-        "--dark-green-1": "145 58% 55%",
+        "--popover-foreground": "240 20% 15%",
+        "--primary": "240 60% 25%", // Deep Royal Blue
+        "--primary-foreground": "240 20% 98%",
+        "--secondary": "150 50% 45%", // Digital Emerald
+        "--secondary-foreground": "150 20% 98%",
+        "--muted": "240 15% 95%",
+        "--muted-foreground": "240 10% 45%",
+        "--accent": "240 15% 92%", // Light Blue-Grey
+        "--accent-foreground": "240 20% 20%",
+        "--destructive": "0 70% 50%",
+        "--destructive-foreground": "0 0% 98%",
+        "--border": "240 15% 88%",
+        "--input": "240 15% 88%",
+        "--ring": "240 60% 25%",
+        "--radius": "0.375rem", // Slightly sharp corners
+        // Chart colors
+        "--chart-1": "240 60% 25%",
+        "--chart-2": "150 50% 45%",
+        "--chart-3": "240 30% 40%",
+        "--chart-4": "150 40% 55%",
+        "--chart-5": "240 20% 70%",
       },
       ".dark": {
-        "--background": "222.2 84% 4.9%",
-        "--foreground": "210 40% 98%",
-        "--card": "222.2 84% 4.9%",
-        "--card-foreground": "210 40% 98%",
-        "--popover": "222.2 84% 4.9%",
-        "--popover-foreground": "210 40% 98%",
-        "--primary": "210 40% 98%",
-        "--primary-foreground": "222.2 47.4% 11.2%",
-        "--secondary": "217.2 32.6% 17.5%",
-        "--secondary-foreground": "210 40% 98%",
-        "--muted": "217.2 32.6% 17.5%",
-        "--muted-foreground": "215 20.2% 65.1%",
-        "--accent": "217.2 32.6% 17.5%",
-        "--accent-foreground": "210 40% 98%",
-        "--destructive": "0 62.8% 30.6%",
-        "--destructive-foreground": "210 40% 98%",
-        "--border": "217.2 32.6% 17.5%",
-        "--input": "217.2 32.6% 17.5%",
-        "--ring": "212.7 26.8% 83.9%",
+        // Dark Mode - Digital Fortress look
+        "--background": "240 40% 10%", // Deep Navy Background
+        "--foreground": "240 10% 95%",
+        "--card": "240 35% 15%", // Slightly lighter navy
+        "--card-foreground": "240 10% 95%",
+        "--popover": "240 35% 15%",
+        "--popover-foreground": "240 10% 95%",
+        "--primary": "240 50% 40%", // Brighter Royal Blue
+        "--primary-foreground": "240 20% 98%",
+        "--secondary": "150 50% 45%", // Glowing Emerald
+        "--secondary-foreground": "150 30% 10%",
+        "--muted": "240 30% 20%",
+        "--muted-foreground": "240 15% 60%",
+        "--accent": "240 30% 20%",
+        "--accent-foreground": "240 10% 95%",
+        "--destructive": "0 70% 45%",
+        "--destructive-foreground": "0 0% 98%",
+        "--border": "240 30% 25%",
+        "--input": "240 30% 25%",
+        "--ring": "240 50% 40%",
       },
     });
 

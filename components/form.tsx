@@ -107,9 +107,9 @@ export default function Form() {
 
   if (step === "mobile") {
     return (
-      <form onSubmit={handleSendOTP} className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
+      <form onSubmit={handleSendOTP} className="flex flex-col space-y-4 bg-muted/30 px-4 py-8 sm:px-16">
         <div>
-          <label htmlFor="mobile" className="block text-xs text-gray-600">
+          <label htmlFor="mobile" className="block text-xs text-muted-foreground">
             رقم الجوال
           </label>
           <input
@@ -122,17 +122,17 @@ export default function Form() {
             dir="ltr"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
-            className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+            className="mt-1 block w-full appearance-none rounded-md border border-border bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
           />
-          <p className="mt-1 text-xs text-gray-500">أدخل رمز الدولة (مثال: +966 للسعودية)</p>
+          <p className="mt-1 text-xs text-muted-foreground">أدخل رمز الدولة (مثال: +966 للسعودية)</p>
         </div>
         <button
           type="submit"
           disabled={loading}
           className={`${
             loading
-              ? "cursor-not-allowed border-gray-200 bg-gray-100"
-              : "border-black bg-black text-white hover:bg-white hover:text-black"
+              ? "cursor-not-allowed border-border bg-muted"
+              : "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
           } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
         >
           {loading ? <LoadingDots color="#808080" /> : "إرسال رمز التحقق"}
@@ -142,9 +142,9 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleVerifyOTP} className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
+    <form onSubmit={handleVerifyOTP} className="flex flex-col space-y-4 bg-muted/30 px-4 py-8 sm:px-16">
       <div>
-        <label htmlFor="otp" className="block text-xs text-gray-600">
+        <label htmlFor="otp" className="block text-xs text-muted-foreground">
           رمز التحقق
         </label>
         <input
@@ -159,9 +159,9 @@ export default function Form() {
           dir="ltr"
           value={otp}
           onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm text-center tracking-widest text-lg"
+          className="mt-1 block w-full appearance-none rounded-md border border-border bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm text-center tracking-widest text-lg"
         />
-        <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs text-muted-foreground">
           تم إرسال الرمز إلى {mobile}
         </p>
       </div>
@@ -170,8 +170,8 @@ export default function Form() {
         disabled={loading || otp.length !== 6}
         className={`${
           loading || otp.length !== 6
-            ? "cursor-not-allowed border-gray-200 bg-gray-100"
-            : "border-black bg-black text-white hover:bg-white hover:text-black"
+            ? "cursor-not-allowed border-border bg-muted"
+            : "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
         } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
       >
         {loading ? <LoadingDots color="#808080" /> : "تحقق وسجّل الدخول"}
@@ -182,7 +182,7 @@ export default function Form() {
           onClick={handleResendOTP}
           disabled={countdown > 0 || loading}
           className={`text-sm ${
-            countdown > 0 ? "text-gray-400" : "text-gray-600 hover:text-black"
+            countdown > 0 ? "text-muted-foreground" : "text-muted-foreground hover:text-primary"
           }`}
         >
           {countdown > 0 ? `إعادة الإرسال خلال ${countdown} ثانية` : "إعادة إرسال الرمز"}
@@ -193,7 +193,7 @@ export default function Form() {
             setStep("mobile");
             setOtp("");
           }}
-          className="text-sm text-gray-600 hover:text-black"
+          className="text-sm text-muted-foreground hover:text-primary"
         >
           تغيير رقم الجوال
         </button>
