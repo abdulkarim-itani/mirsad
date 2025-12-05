@@ -13,16 +13,45 @@ This is a <a href="https://nextjs.org/">Next.js</a> starter kit that uses <a hre
 
 ## Configure the Database
 
-- create a `.env` file in the root of the project
+### Option 1: Quick Setup with Docker Compose (Recommended)
+
+1. Start the PostgreSQL database:
+
+```bash
+docker compose up -d
+```
+
+2. Create a `.env` file in the root of the project:
 
 ```
-# Create a Postgres database
+# Docker Compose PostgreSQL
+POSTGRES_PRISMA_URL="postgresql://postgres:postgres@localhost:5432/mirsad"
+POSTGRES_URL_NON_POOLING="postgresql://postgres:postgres@localhost:5432/mirsad"
+
+# Generate one with this command: openssl rand -base64 32
+NEXTAUTH_SECRET=
+```
+
+3. Run Prisma migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+### Option 2: Use Your Own PostgreSQL Database
+
+Create a `.env` file in the root of the project:
+
+```
+# Your PostgreSQL connection string
 POSTGRES_PRISMA_URL=
 POSTGRES_URL_NON_POOLING=
 
 # Generate one with this command: openssl rand -base64 32
 NEXTAUTH_SECRET=
 ```
+
+---
 
 First, run the development server:
 
