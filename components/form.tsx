@@ -38,16 +38,16 @@ export default function Form() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.error || "Failed to send OTP");
+        toast.error(data.error || "فشل إرسال رمز التحقق");
         setLoading(false);
         return;
       }
 
-      toast.success("OTP sent to your mobile");
+      toast.success("تم إرسال رمز التحقق إلى جوالك");
       setStep("otp");
       setCountdown(60);
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setLoading(false);
     }
@@ -73,7 +73,7 @@ export default function Form() {
       router.refresh();
       router.push("/protected");
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
       setLoading(false);
     }
   };
@@ -92,14 +92,14 @@ export default function Form() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.error || "Failed to resend OTP");
+        toast.error(data.error || "فشل إعادة إرسال رمز التحقق");
         return;
       }
 
-      toast.success("OTP resent to your mobile");
+      toast.success("تم إعادة إرسال رمز التحقق إلى جوالك");
       setCountdown(60);
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setLoading(false);
     }
@@ -109,21 +109,22 @@ export default function Form() {
     return (
       <form onSubmit={handleSendOTP} className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
         <div>
-          <label htmlFor="mobile" className="block text-xs text-gray-600 uppercase">
-            Mobile Number
+          <label htmlFor="mobile" className="block text-xs text-gray-600">
+            رقم الجوال
           </label>
           <input
             id="mobile"
             name="mobile"
             type="tel"
-            placeholder="+1234567890"
+            placeholder="+966512345678"
             autoComplete="tel"
             required
+            dir="ltr"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
             className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
           />
-          <p className="mt-1 text-xs text-gray-500">Include country code (e.g., +1 for US)</p>
+          <p className="mt-1 text-xs text-gray-500">أدخل رمز الدولة (مثال: +966 للسعودية)</p>
         </div>
         <button
           type="submit"
@@ -134,7 +135,7 @@ export default function Form() {
               : "border-black bg-black text-white hover:bg-white hover:text-black"
           } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
         >
-          {loading ? <LoadingDots color="#808080" /> : "Send OTP"}
+          {loading ? <LoadingDots color="#808080" /> : "إرسال رمز التحقق"}
         </button>
       </form>
     );
@@ -143,8 +144,8 @@ export default function Form() {
   return (
     <form onSubmit={handleVerifyOTP} className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
       <div>
-        <label htmlFor="otp" className="block text-xs text-gray-600 uppercase">
-          Verification Code
+        <label htmlFor="otp" className="block text-xs text-gray-600">
+          رمز التحقق
         </label>
         <input
           id="otp"
@@ -153,14 +154,15 @@ export default function Form() {
           inputMode="numeric"
           pattern="[0-9]*"
           maxLength={6}
-          placeholder="Enter 6-digit code"
+          placeholder="أدخل الرمز المكون من 6 أرقام"
           required
+          dir="ltr"
           value={otp}
           onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
           className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm text-center tracking-widest text-lg"
         />
         <p className="mt-1 text-xs text-gray-500">
-          Code sent to {mobile}
+          تم إرسال الرمز إلى {mobile}
         </p>
       </div>
       <button
@@ -172,7 +174,7 @@ export default function Form() {
             : "border-black bg-black text-white hover:bg-white hover:text-black"
         } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
       >
-        {loading ? <LoadingDots color="#808080" /> : "Verify & Sign In"}
+        {loading ? <LoadingDots color="#808080" /> : "تحقق وسجّل الدخول"}
       </button>
       <div className="flex flex-col items-center space-y-2">
         <button
@@ -183,7 +185,7 @@ export default function Form() {
             countdown > 0 ? "text-gray-400" : "text-gray-600 hover:text-black"
           }`}
         >
-          {countdown > 0 ? `Resend OTP in ${countdown}s` : "Resend OTP"}
+          {countdown > 0 ? `إعادة الإرسال خلال ${countdown} ثانية` : "إعادة إرسال الرمز"}
         </button>
         <button
           type="button"
@@ -193,7 +195,7 @@ export default function Form() {
           }}
           className="text-sm text-gray-600 hover:text-black"
         >
-          Change mobile number
+          تغيير رقم الجوال
         </button>
       </div>
     </form>

@@ -46,23 +46,23 @@ import {
 
 const groups = [
   {
-    label: "Personal Account",
+    label: "الحساب الشخصي",
     teams: [
       {
-        label: "Alicia Koch",
+        label: "حسابي",
         value: "personal",
       },
     ],
   },
   {
-    label: "Teams",
+    label: "الفرق",
     teams: [
       {
-        label: "Acme Inc.",
+        label: "شركة أكمي",
         value: "acme-inc",
       },
       {
-        label: "Monsters Inc.",
+        label: "شركة مونسترز",
         value: "monsters",
       },
     ],
@@ -90,25 +90,27 @@ export default function ProfileSwitcher({ className }: ProfileSwitcherProps & { 
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            aria-label="Select a team"
-            className={cn("w-[200px] justify-between", className)}
+            aria-label="اختر فريقاً"
+            className={cn("w-[200px] justify-between gap-2", className)}
           >
-            <Avatar className="mr-2 h-5 w-5">
-              <AvatarImage
-                src={`https://avatar.vercel.sh/${selectedTeam.value}.png`}
-                alt={selectedTeam.label}
-              />
-              <AvatarFallback>SC</AvatarFallback>
-            </Avatar>
-            {selectedTeam.label}
-            <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+            <div className="flex items-center gap-2">
+              <Avatar className="h-5 w-5">
+                <AvatarImage
+                  src={`https://avatar.vercel.sh/${selectedTeam.value}.png`}
+                  alt={selectedTeam.label}
+                />
+                <AvatarFallback>ف</AvatarFallback>
+              </Avatar>
+              {selectedTeam.label}
+            </div>
+            <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandList>
-              <CommandInput placeholder="Search team..." />
-              <CommandEmpty>No team found.</CommandEmpty>
+              <CommandInput placeholder="ابحث عن فريق..." />
+              <CommandEmpty>لم يتم العثور على فريق.</CommandEmpty>
               {groups.map((group) => (
                 <CommandGroup key={group.label} heading={group.label}>
                   {group.teams.map((team) => (
@@ -118,20 +120,20 @@ export default function ProfileSwitcher({ className }: ProfileSwitcherProps & { 
                         setSelectedTeam(team)
                         setOpen(false)
                       }}
-                      className="text-sm"
+                      className="text-sm flex items-center gap-2"
                     >
-                      <Avatar className="mr-2 h-5 w-5">
+                      <Avatar className="h-5 w-5">
                         <AvatarImage
                           src={`https://avatar.vercel.sh/${team.value}.png`}
                           alt={team.label}
                           className="grayscale"
                         />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>ف</AvatarFallback>
                       </Avatar>
-                      {team.label}
+                      <span className="flex-1">{team.label}</span>
                       <CheckIcon
                         className={cn(
-                          "ml-auto h-4 w-4",
+                          "h-4 w-4",
                           selectedTeam.value === team.value
                             ? "opacity-100"
                             : "opacity-0"
@@ -151,9 +153,10 @@ export default function ProfileSwitcher({ className }: ProfileSwitcherProps & { 
                       setOpen(false)
                       setShowNewTeamDialog(true)
                     }}
+                    className="flex items-center gap-2"
                   >
-                    <PlusCircledIcon className="mr-2 h-5 w-5" />
-                    Create Team
+                    <PlusCircledIcon className="h-5 w-5" />
+                    إنشاء فريق
                   </CommandItem>
                 </DialogTrigger>
               </CommandGroup>
@@ -163,34 +166,34 @@ export default function ProfileSwitcher({ className }: ProfileSwitcherProps & { 
       </Popover>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create team</DialogTitle>
+          <DialogTitle>إنشاء فريق</DialogTitle>
           <DialogDescription>
-            Add a new team to manage products and customers.
+            أضف فريقاً جديداً لإدارة المنتجات والعملاء.
           </DialogDescription>
         </DialogHeader>
         <div>
           <div className="space-y-4 py-2 pb-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Team name</Label>
-              <Input id="name" placeholder="Acme Inc." />
+              <Label htmlFor="name">اسم الفريق</Label>
+              <Input id="name" placeholder="شركة أكمي" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="plan">Subscription plan</Label>
+              <Label htmlFor="plan">خطة الاشتراك</Label>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a plan" />
+                  <SelectValue placeholder="اختر خطة" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="free">
-                    <span className="font-medium">Free</span> -{" "}
+                    <span className="font-medium">مجاني</span> -{" "}
                     <span className="text-muted-foreground">
-                      Trial for two weeks
+                      تجربة لمدة أسبوعين
                     </span>
                   </SelectItem>
                   <SelectItem value="pro">
-                    <span className="font-medium">Pro</span> -{" "}
+                    <span className="font-medium">احترافي</span> -{" "}
                     <span className="text-muted-foreground">
-                      $9/month per user
+                      9$ شهرياً لكل مستخدم
                     </span>
                   </SelectItem>
                 </SelectContent>
@@ -200,9 +203,9 @@ export default function ProfileSwitcher({ className }: ProfileSwitcherProps & { 
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setShowNewTeamDialog(false)}>
-            Cancel
+            إلغاء
           </Button>
-          <Button type="submit">Continue</Button>
+          <Button type="submit">متابعة</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

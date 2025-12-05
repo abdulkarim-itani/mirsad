@@ -10,9 +10,9 @@ import Image from "next/image";
 
 export default async function Header() {
   const navigation = [
-    { key: "Home", value: "" },
-    { key: "About", value: "features" },
-    { key: "Pricing", value: "pricing" },
+    { key: "الرئيسية", value: "" },
+    { key: "المميزات", value: "features" },
+    { key: "الأسعار", value: "pricing" },
   ] as INavLink[];
 
   const session = await getServerSession();
@@ -21,32 +21,24 @@ export default async function Header() {
     <>
       <div className="hidden flex-col md:flex">
         <div className="border-b">
-          <div className="flex h-16 items-center px-4">
+          <div className="flex h-16 items-center px-4 gap-6">
             {(session && session.user && (
               <>
                 <ProfileSwitcher className="" session={session} />
-                <div className="mx-6">
-                  <NavElements navigationLinks={navigation} />
-                </div>
-                <div className="ml-auto flex items-center space-x-4">
-                  <UserNav />
-                </div>
+                <NavElements navigationLinks={navigation} />
+                <div className="flex-1" />
+                <UserNav />
               </>
             )) || (
               <>
-                <div className="flex items-center space-x-6 ">
-                  <Image src="/logo.png" alt="logo" width={48} height={48} />
-                </div>
-                <div className="mx-6 ">
-                  <NavElements navigationLinks={navigation} />
-                </div>
-                <div className="ml-auto flex items-center space-x-4">
-                  <Link href="/register" className="">
-                  <Button variant="brown" >
-                      Register
-                    </Button>
-                  </Link>
-                </div>
+                <Image src="/logo.png" alt="الشعار" width={48} height={48} />
+                <NavElements navigationLinks={navigation} />
+                <div className="flex-1" />
+                <Link href="/login">
+                  <Button variant="brown">
+                    تسجيل الدخول
+                  </Button>
+                </Link>
               </>
             )}
           </div>

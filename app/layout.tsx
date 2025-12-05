@@ -1,19 +1,28 @@
 // These styles apply to every route in the application
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Almarai, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import Header from "@/components/header/header";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const almarai = Almarai({
+  subsets: ["arabic"],
+  weight: ["300", "400", "700", "800"],
+  variable: "--font-almarai",
+  display: "swap",
 });
 
-const title = "Next.js Prisma Postgres Auth Starter";
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans-arabic",
+  display: "swap",
+});
+
+const title = "مرصاد";
 const description =
-  "This is a Next.js starter kit that uses Next-Auth for simple email + password login and a Postgres database to persist the data.";
+  "منصة مرصاد لإدارة الأعمال والمشاريع";
 
 export const metadata: Metadata = {
   title,
@@ -40,10 +49,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.variable}>
+    <html lang="ar" dir="rtl" className={`${almarai.variable} ${ibmPlexSansArabic.variable}`}>
+      <body>
         <Toaster />
-        <Suspense fallback="Loading...">
+        <Suspense fallback="جاري التحميل...">
           <Header />
         </Suspense>
         {children}

@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Form from "@/components/form";
 import Link from "next/link";
+import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
 
-export default function Login() {
+export default async function Login() {
+  const session = await getServerSession();
+  
+  if (session?.user) {
+    redirect("/protected");
+  }
+
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
@@ -11,15 +19,15 @@ export default function Login() {
             <Image
               src="/logo.png"
               priority
-              alt="Logo"
+              alt="الشعار"
               className="h-10 w-10 rounded-full"
               width={20}
               height={20}
             />
           </Link>
-          <h3 className="text-xl font-semibold">Welcome</h3>
+          <h3 className="text-xl font-semibold">أهلاً وسهلاً</h3>
           <p className="text-sm text-gray-500">
-            Sign in with your mobile number
+            سجّل دخولك باستخدام رقم الجوال
           </p>
         </div>
         <Form />
